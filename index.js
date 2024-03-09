@@ -1,18 +1,17 @@
-import { Client } from 'pg';
+const pg = require("pg")
 
-// Replace these values with your PostgreSQL connection details
 const connectionString = "postgresql://yakshit:-eZfWw2zQKffFmvntDaL-g@sparkdb-6147.6xw.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full";
 
-const client = new Client({
+const client = new pg.Client({
     connectionString: connectionString,
 });
 
-async function resetColumns() {
+exports.handler = async (event) => {
     try {
         await client.connect();
         // Execute the update query to reset 'hits' and 'status' columns in 'UserDetails' table
         const query1 = ` 
-            UPDATE userrequests SET hits = 0;
+            UPDATE userdetails SET hits = 0;
             UPDATE userkeystatus SET status = 'ok';
         `;
         const result = await client.query(query1);
@@ -22,6 +21,4 @@ async function resetColumns() {
     } finally {
         await client.end();
     }
-}
-
-resetColumns();
+};
