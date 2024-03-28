@@ -1,6 +1,6 @@
 const pg = require("pg")
 
-const connectionString = "postgresql://yakshit:-eZfWw2zQKffFmvntDaL-g@sparkdb-6147.6xw.aws-ap-southeast-1.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full";
+const connectionString = "db_url";
 
 const client = new pg.Client({
     connectionString: connectionString,
